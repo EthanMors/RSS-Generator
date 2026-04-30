@@ -1,6 +1,2 @@
 requests
 python-dotenv
-apscheduler
-streamlit
-pandas
-plotly

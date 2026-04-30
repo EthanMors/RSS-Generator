@@ -23,9 +23,3 @@ USER_AGENT = f"python:{APP_ID}:{APP_VERSION} (by /u/{REDDIT_USERNAME})"
 # Reddit fetch settings
 REDDIT_POST_LIMIT = 100        # Max posts per request (Reddit max is 100)
 REDDIT_BASE_URL = "https://www.reddit.com"
-
-# SQLite database file path (same directory as this script)
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reddit_stocks.db")
-
-# Scheduler interval in minutes
-POLL_INTERVAL_MINUTES = 15
