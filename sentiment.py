@@ -24,10 +24,12 @@ Rules:
 - If the ticker is not directly discussed, return neutral with score 0.0"""
 
         result = subprocess.run(
-            ["gemini", "-p", prompt],
+            "gemini",
+            input=prompt,
             capture_output=True,
             text=True,
             timeout=30,
+            shell=True
         )
 
         if result.returncode != 0:
@@ -35,15 +37,18 @@ Rules:
 
         response_text = result.stdout.strip()
 
-        # Remove markdown code fences if present
-        response_text = re.sub(r"```(?:json)?\s*", "", response_text).strip()
-        parsed = json.loads(response_text)
+        # Robustly find JSON block in the output
+        json_match = re.search(r"(\{.*\})", response_text, re.DOTALL)
+        if not json_match:
+            raise ValueError(f"No JSON found in gemini output: {response_text}")
+        
+        parsed = json.loads(json_match.group(1))
 
         # Validate and clamp sentiment_score
         sentiment_score = max(-1.0, min(1.0, float(parsed["sentiment_score"])))
 
         # Validate sentiment_label
-        sentiment_label = parsed["sentiment_label"]
+        sentiment_label = parsed.get("sentiment_label", "")
         if sentiment_label not in ["positive", "negative", "neutral"]:
             if sentiment_score > 0.1:
                 sentiment_label = "positive"
