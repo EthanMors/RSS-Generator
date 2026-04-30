@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.jcchouinard.com)",
+      "WebFetch(domain:til.simonwillison.net)",
+      "WebFetch(domain:data365.co)"
+    ]
+  }
+}
