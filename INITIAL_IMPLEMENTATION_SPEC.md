@@ -560,25 +560,19 @@ def extract_tickers(text: str) -> dict[str, int]:
 
 ## 9. `sentiment.py` — Gemini Sentiment Analysis
 
-**Purpose:** Given post text (title + body), call Gemini and return a sentiment score and label.
+**Purpose:** Given post text (title + body), call the Gemini CLI and return a sentiment score and label.
 
 ### 9a. Import Block
 
 ```python
-import google.generativeai as genai
+import subprocess
 import json
 import re
-import config
 ```
 
-### 9b. Gemini Client Setup
+### 9b. Gemini CLI Usage
 
-At module level (runs once when module is imported):
-
-```python
-genai.configure(api_key=config.GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-2.0-flash")
-```
+The function executes the `gemini` command via `subprocess`.
 
 ### 9c. `analyze_sentiment(title: str, body: str, ticker: str) -> dict`
 
@@ -1046,3 +1040,5 @@ pip install streamlit pandas plotly
 ---
 
 *End of specification. Implement all files exactly as described.*
+n. Implement all files exactly as described.*
+End of specification. Implement all files exactly as described.*
